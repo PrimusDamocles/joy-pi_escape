@@ -118,6 +118,7 @@ while True:
     
     # Optional: Add delays to control game speed
     time.sleep(0.2)
+    matirx.clean()
 
 # Game over or victory handling
 # Display victory animation or end game logic here
