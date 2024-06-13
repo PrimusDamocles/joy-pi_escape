@@ -30,6 +30,10 @@ mouse_y = 1
 goal_x = 6
 goal_y = 6
 
+# Direction variables
+direc_x = 0
+direc_y = 0
+
 # Game loop
 while True:
     # Update LED matrix display
@@ -64,7 +68,14 @@ while True:
         matrix.show()
         
         time.sleep(5)  # Display for 5 seconds before exiting
-        break
+        
+        # Reset game
+        mouse_x = 1
+        mouse_y = 1
+        direc_x = 0
+        direc_y = 0
+        
+        continue
     
     # Example joystick control (adapt to your input method)
     # Read joystick input or use ADC values to control mouse movement
@@ -73,20 +84,32 @@ while True:
     
     if value_x < 1800:
         # Move left
-        if maze[mouse_y][mouse_x - 1] != 1:
-            mouse_x -= 1
+        direc_x = -1
+        direc_y = 0
     elif value_x > 2350:
         # Move right
-        if maze[mouse_y][mouse_x + 1] != 1:
-            mouse_x += 1
+        direc_x = 1
+        direc_y = 0
     elif value_y > 2350:
         # Move up
-        if maze[mouse_y - 1][mouse_x] != 1:
-            mouse_y -= 1
+        direc_x = 0
+        direc_y = -1
     elif value_y < 1800:
         # Move down
-        if maze[mouse_y + 1][mouse_x] != 1:
-            mouse_y += 1
+        direc_x = 0
+        direc_y = 1
+    
+    # Check if next move hits a wall
+    if maze[mouse_y + direc_y][mouse_x + direc_x] == 1:
+        # Reset position if hitting a wall
+        mouse_x = 1
+        mouse_y = 1
+        direc_x = 0
+        direc_y = 0
+    else:
+        # Update mouse position
+        mouse_x += direc_x
+        mouse_y += direc_y
     
     # Optional: Add delays to control game speed
     time.sleep(0.2)
