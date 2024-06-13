@@ -23,16 +23,12 @@ maze = [
 ]
 
 # Mouse initial position
-mouse_x = 0
-mouse_y = 0
+mouse_x = 1
+mouse_y = 1
 
 # Goal position
 goal_x = 6
 goal_y = 6
-
-# Direction variables
-direc_x = 0
-direc_y = 0
 
 # Game loop
 while True:
@@ -58,56 +54,31 @@ while True:
     if mouse_x == goal_x and mouse_y == goal_y:
         # Display win message on LED matrix
         matrix.clean()
-        matrix.text("You Win!", (255, 255, 255))  # Display "You Win!" message in white
         matrix.show()
-        
-        # Turn matrix green
-        for i in range(maze_width * maze_height):
-            matrix.setPixel(i, (0, 255, 0))  # Green
-        
-        matrix.show()
-        
         time.sleep(5)  # Display for 5 seconds before exiting
-        
-        # Reset game
-        mouse_x = 0
-        mouse_y = 0
-        direc_x = 0
-        direc_y = 0
-        
-        continue
+        break
     
     # Example joystick control (adapt to your input method)
     # Read joystick input or use ADC values to control mouse movement
     # Example movement logic (adjust as needed)
     value_x, value_y = adc.read_value(0), adc.read_value(1)
     
-    # Print debug statements for troubleshooting
-    print(f"Joystick/ADC values: X={value_x}, Y={value_y}")
-    
-    # Adjust joystick/ADC thresholds and direction control
     if value_x < 1800:
-        direc_x = -1
-        direc_y = 0
+        # Move left
+        if maze[mouse_y][mouse_x - 1] != 1:
+            mouse_x -= 1
     elif value_x > 2350:
-        direc_x = 1
-        direc_y = 0
+        # Move right
+        if maze[mouse_y][mouse_x + 1] != 1:
+            mouse_x += 1
     elif value_y > 2350:
-        direc_x = 0
-        direc_y = -1
+        # Move up
+        if maze[mouse_y - 1][mouse_x] != 1:
+            mouse_y -= 1
     elif value_y < 1800:
-        direc_x = 0
-        direc_y = 1
-    
-    # Check if next move hits a wall or stays within maze boundaries
-    if (0 <= mouse_x + direc_x < maze_width) and (0 <= mouse_y + direc_y < maze_height):
-        if maze[mouse_y + direc_y][mouse_x + direc_x] == 0:
-            # Update mouse position
-            mouse_x += direc_x
-            mouse_y += direc_y
-    else:
-        # Print debug statement for boundary check or invalid move
-        print("Boundary reached or invalid move")
+        # Move down
+        if maze[mouse_y + 1][mouse_x] != 1:
+            mouse_y += 1
     
     # Optional: Add delays to control game speed
     time.sleep(0.2)
