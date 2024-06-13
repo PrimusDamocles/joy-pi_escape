@@ -1,4 +1,3 @@
-#Joy-Pi Advanced Code
 # -*- coding: iso-8859-1 -*-
 # Required modules are imported and set up
 import RPi.GPIO as GPIO
@@ -121,22 +120,26 @@ def play(notes, timings, music_time, speed = 1, rep = 1):
             # stop to accentuate a single note
             time.sleep(0.05)
 
-# Play All Star
-print("All Star - Smash Mouth")
+# Play Cantina Band
+print("Cantina Band - John Williams")
 # define notes into array
-all_star_notes = [
-    'G4', 'A4', 'B4', 'G4', 'G4', 'A4', 'B4', 'G4', 'D5', 'C5', 'B4', 'A4', 'G4', 'F4', 'E4', 'E4', 
-    'G4', 'A4', 'B4', 'G4', 'G4', 'A4', 'B4', 'G4', 'D5', 'C5', 'B4', 'A4', 'G4', 'F4', 'E4', 'E4'
+cantina_band_notes = [
+    'B4', 'B4', 'B4', 'B4', 'F4', 'B4', 'B4', 'B4', 'B4', 'F4', 'B4', 'B4', 'B4', 'B4', 'F4',
+    'A4', 'A4', 'A4', 'A4', 'F4', 'A4', 'A4', 'A4', 'A4', 'F4', 'A4', 'A4', 'A4', 'A4', 'F4',
+    'G4', 'G4', 'G4', 'G4', 'F4', 'G4', 'G4', 'G4', 'G4', 'F4', 'G4', 'G4', 'G4', 'G4', 'F4',
+    'A4', 'A4', 'A4', 'A4', 'F4', 'A4', 'A4', 'A4', 'A4', 'F4', 'A4', 'A4', 'A4', 'A4', 'F4'
 ]
 # define timings for the notes into an array
-all_star_timings = [
-    1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 
-    1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2
+cantina_band_timings = [
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4
 ]
 # define time of the song
-all_star_time = 4
+cantina_band_time = 4
 # run the method play with defined variables
-play(all_star_notes, all_star_timings, all_star_time, speed = 1, rep = 1)
+play(cantina_band_notes, cantina_band_timings, cantina_band_time, speed = 1, rep = 1)
 
 # cleans up after program is finished
 GPIO.cleanup()
