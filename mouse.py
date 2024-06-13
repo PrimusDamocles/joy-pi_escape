@@ -26,7 +26,7 @@ maze = [
 mouse_x = 1
 mouse_y = 1
 
-# Goal position (randomize as needed)
+# Goal position
 goal_x = 6
 goal_y = 6
 
@@ -35,12 +35,12 @@ while True:
     # Update LED matrix display
     matrix.clean()
     
-    # Draw maze walls
+    # Draw maze walls and hide blue lights
     for y in range(maze_height):
         for x in range(maze_width):
             if maze[y][x] == 1:
-                matrix.setPixel(y * maze_width + x, (0, 0, 255))  # Blue for walls
-
+                matrix.setPixel(y * maze_width + x, (0, 0, 0))  # Hide blue lights (set to black)
+    
     # Draw mouse
     matrix.setPixel(mouse_y * maze_width + mouse_x, (255, 0, 0))  # Red for mouse
     
@@ -49,6 +49,22 @@ while True:
     
     # Show updated matrix
     matrix.show()
+    
+    # Check win condition
+    if mouse_x == goal_x and mouse_y == goal_y:
+        # Display win message on LED matrix
+        matrix.clean()
+        matrix.text("You Win!", (255, 255, 255))  # Display "You Win!" message in white
+        matrix.show()
+        
+        # Turn matrix green
+        for i in range(maze_width * maze_height):
+            matrix.setPixel(i, (0, 255, 0))  # Green
+        
+        matrix.show()
+        
+        time.sleep(5)  # Display for 5 seconds before exiting
+        break
     
     # Example joystick control (adapt to your input method)
     # Read joystick input or use ADC values to control mouse movement
@@ -71,11 +87,6 @@ while True:
         # Move down
         if maze[mouse_y + 1][mouse_x] != 1:
             mouse_y += 1
-    
-    # Check win condition
-    if mouse_x == goal_x and mouse_y == goal_y:
-        # Handle win scenario (e.g., show victory animation)
-        break
     
     # Optional: Add delays to control game speed
     time.sleep(0.2)
