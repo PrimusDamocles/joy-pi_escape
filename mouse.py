@@ -23,8 +23,8 @@ maze = [
 ]
 
 # Mouse initial position
-mouse_x = 1
-mouse_y = 1
+mouse_x = 0
+mouse_y = 0
 
 # Goal position
 goal_x = 6
@@ -70,8 +70,8 @@ while True:
         time.sleep(5)  # Display for 5 seconds before exiting
         
         # Reset game
-        mouse_x = 1
-        mouse_y = 1
+        mouse_x = 0
+        mouse_y = 0
         direc_x = 0
         direc_y = 0
         
@@ -82,34 +82,32 @@ while True:
     # Example movement logic (adjust as needed)
     value_x, value_y = adc.read_value(0), adc.read_value(1)
     
+    # Print debug statements for troubleshooting
+    print(f"Joystick/ADC values: X={value_x}, Y={value_y}")
+    
+    # Adjust joystick/ADC thresholds and direction control
     if value_x < 1800:
-        # Move left
         direc_x = -1
         direc_y = 0
     elif value_x > 2350:
-        # Move right
         direc_x = 1
         direc_y = 0
     elif value_y > 2350:
-        # Move up
         direc_x = 0
         direc_y = -1
     elif value_y < 1800:
-        # Move down
         direc_x = 0
         direc_y = 1
     
-    # Check if next move hits a wall
-    if maze[mouse_y + direc_y][mouse_x + direc_x] == 1:
-        # Reset position if hitting a wall
-        mouse_x = 1
-        mouse_y = 1
-        direc_x = 0
-        direc_y = 0
+    # Check if next move hits a wall or stays within maze boundaries
+    if (0 <= mouse_x + direc_x < maze_width) and (0 <= mouse_y + direc_y < maze_height):
+        if maze[mouse_y + direc_y][mouse_x + direc_x] == 0:
+            # Update mouse position
+            mouse_x += direc_x
+            mouse_y += direc_y
     else:
-        # Update mouse position
-        mouse_x += direc_x
-        mouse_y += direc_y
+        # Print debug statement for boundary check or invalid move
+        print("Boundary reached or invalid move")
     
     # Optional: Add delays to control game speed
     time.sleep(0.2)
