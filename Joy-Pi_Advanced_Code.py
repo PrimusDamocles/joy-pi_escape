@@ -112,8 +112,8 @@ def play_song(notes, timings, speed=1, rep=1):
             buzz(read_notes[note], timing / speed)
             time.sleep(0.05)  # brief pause between notes
 
-# Play Super Mario Theme
-print("Super Mario Theme Song")
+# Play Super Mario Theme (extended)
+print("Super Mario Theme Song (Extended)")
 # define notes into array
 mario_notes = [
     'E7', 'E7', '', 'E7', '',
@@ -124,7 +124,25 @@ mario_notes = [
     'B6', '', 'AS6', 'A6', '',
     'G6', 'E7', '', 'G7', 'A7', '',
     'F7', 'G7', '', 'E7', '',
-    'C7', 'D7', 'B6', '', '', ''
+    'C7', 'D7', 'B6', '', '',
+
+    'C7', 'G6', 'E6', 'A6', 'B6', 'A6',
+    'G6', 'E7', 'G7', 'A7', 'F7', 'G7',
+    'E7', 'C7', 'D7', 'B6', '', '',
+    'C7', 'G6', 'E6', 'A6', 'B6', 'A6',
+    'G6', 'E7', 'G7', 'A7', 'F7', 'G7',
+
+    'E7', 'C7', 'D7', 'B6', '', '',
+    'C7', 'G6', 'E6', 'A6', 'B6', 'A6',
+    'G6', 'E7', 'G7', 'A7', 'F7', 'G7',
+    'E7', 'C7', 'D7', 'B6', '', '',
+    'C7', 'G6', 'E6', 'A6', 'B6', 'A6',
+
+    'G6', 'E7', 'G7', 'A7', 'F7', 'G7',
+    'E7', 'C7', 'D7', 'B6', '', '',
+    'C7', 'G6', 'E6', 'A6', 'B6', 'A6',
+    'G6', 'E7', 'G7', 'A7', 'F7', 'G7',
+    'E7', 'C7', 'D7', 'B6', '', '',
 ]
 # define timings for the notes into an array (in seconds)
 mario_timings = [
@@ -136,10 +154,28 @@ mario_timings = [
     0.15, 0.15, 0.15, 0.15, 0.15,
     0.15, 0.15, 0.15, 0.15, 0.15,
     0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
+    0.15, 0.15, 0.15, 0.15, 0.15,
     0.15, 0.15, 0.15, 0.15, 0.15
+    
 ]
-# run the method play with defined variables
-play_song(mario_notes, mario_timings, speed=1, rep=1)
 
-# cleans up after program is finished
+play_song(mario_notes, mario_timings, speed = 3, rep = 1)
+
 GPIO.cleanup()
